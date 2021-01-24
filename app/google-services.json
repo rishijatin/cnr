@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "84936798960",
+    "firebase_url": "https://cnrapp-85a3d-default-rtdb.firebaseio.com",
+    "project_id": "cnrapp-85a3d",
+    "storage_bucket": "cnrapp-85a3d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84936798960:android:c4132e2e9f48227310c835",
+        "android_client_info": {
+          "package_name": "com.example.cnrapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84936798960-6hshq89igksboginnbiglh914ag8ep44.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhaDhbkrm7Nq7CYfXEgUM1hZLlwOGuqWU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84936798960-6hshq89igksboginnbiglh914ag8ep44.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
