@@ -64,7 +64,7 @@ public class CategoryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("Categories");
         SwipeRefreshLayout swipeRefreshLayout = findViewById(R.id.swipe);
         progressBar = findViewById(R.id.progressBar);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

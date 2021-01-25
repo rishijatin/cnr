@@ -94,7 +94,7 @@ public class DoctorDetailActivity extends AppCompatActivity {
         sendMailButton.setVisibility(View.VISIBLE);
 
         doctorName.setText(doctor.getName());
-        experience.setText(String.valueOf(doctor.getExperience()));
+        experience.setText(String.valueOf(doctor.getExperience()+" years"));
         qualification.setText(String.valueOf(doctor.getQualification()));
         description.setText(doctor.getDescription());
 
@@ -110,7 +110,7 @@ public class DoctorDetailActivity extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("message/rfc822");
                 i.putExtra(Intent.EXTRA_EMAIL, new String[]{"cnr@innohub.technology"});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Appointment for "+doctor.getName());
+                i.putExtra(Intent.EXTRA_SUBJECT, "Appointment with "+doctor.getName());
 
                 if(i.resolveActivity(getPackageManager())!=null)
                 {

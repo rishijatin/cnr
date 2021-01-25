@@ -5,8 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CategoryActivity"
-    android:background="@color/background_color">
+    android:background="@color/background_color"
+    tools:context=".CategoryActivity">
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe"
@@ -20,13 +20,12 @@
             android:gravity="center"
             android:numColumns="2"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:paddingBottom="64dp"
+            android:clipToPadding="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-
 
 
     <ProgressBar
@@ -44,17 +43,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:visibility="gone"
         android:layout_marginBottom="16dp"
-        app:shapeAppearanceOverlay="@style/fab"
         android:backgroundTint="@color/action_bar_color"
         android:clickable="true"
-        app:tint="#ffffff"
+        android:src="@drawable/ic_icon"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/ic_icon" />
-
-
+        app:shapeAppearanceOverlay="@style/fab"
+        app:tint="#ffffff" />
 
 
 

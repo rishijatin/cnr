@@ -2,7 +2,9 @@ package com.example.cnrapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +19,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cnrapp.api.RetrofitBuilder;
+import com.example.cnrapp.callbacks.RetrofitCallBack;
+import com.example.cnrapp.models.ContactInfo;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
@@ -24,16 +29,21 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.ConcurrentHashMap;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class EnquiryFormActivity extends AppCompatActivity {
 
-    private final String phoneNo1 = "<u>+91-8333899956</u>";
-    private final String phoneNo2 = "<u>+91-8121166999</u>";
-    private final String email = "<u>cnr@innohub.technology</u>";
+    private ContactInfo contact;
+
     private EditText nameEdit;
     private EditText emailEdit;
     private EditText mobileEdit;
     private EditText enquiryEdit;
     private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("Queries");
+    private ConstraintLayout layout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +51,49 @@ public class EnquiryFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enquiry_form);
         getSupportActionBar().setTitle("Enquiry Form");
 
-        setClickListeners();
-        setInputFormElements();
 
+
+        getContact(new RetrofitCallBack() {
+            @Override
+            public void onComplete() {
+                setClickListeners();
+                setInputFormElements();
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
 
     }
+
+    void getContact(RetrofitCallBack callBack)
+    {
+        Call<ContactInfo> call = RetrofitBuilder.BuildRetrofit.build().getContact();
+        call.enqueue(new Callback<ContactInfo>() {
+            @Override
+            public void onResponse(Call<ContactInfo> call, Response<ContactInfo> response) {
+                if(!response.isSuccessful())
+                {
+                    Toast.makeText(EnquiryFormActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                    callBack.onFailure();
+                    return;
+                }
+                contact=response.body();
+                callBack.onComplete();
+
+            }
+
+            @Override
+            public void onFailure(Call<ContactInfo> call, Throwable t) {
+                Toast.makeText(EnquiryFormActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                callBack.onFailure();
+                return;
+            }
+        });
+    }
+
 
     void setInputFormElements() {
         nameEdit = findViewById(R.id.nameEdit);
@@ -53,19 +101,23 @@ public class EnquiryFormActivity extends AppCompatActivity {
         mobileEdit = findViewById(R.id.editContact);
         enquiryEdit = findViewById(R.id.editEnquiry);
 
-        Button send = findViewById(R.id.button);
 
+        Button send = findViewById(R.id.button);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validateForm() == true) {
+
+
                     DatabaseReference newQuery = mDatabase.push();
+
                     newQuery.child("Name").setValue(nameEdit.getText().toString());
                     newQuery.child("Email").setValue(emailEdit.getText().toString());
                     newQuery.child("Phone Number").setValue(mobileEdit.getText().toString());
                     newQuery.child("Enquiry").setValue(enquiryEdit.getText().toString()).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+
                             emailEdit.setText("");
                             mobileEdit.setText("");
                             nameEdit.setText("");
@@ -73,11 +125,10 @@ public class EnquiryFormActivity extends AppCompatActivity {
                             Toast.makeText(EnquiryFormActivity.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
                             finish();
                         }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
+                    }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(EnquiryFormActivity.this, "Some error occured", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(EnquiryFormActivity.this, "Some error occurred", Toast.LENGTH_SHORT).show();
                                 }
                             });
 
@@ -109,40 +160,49 @@ public class EnquiryFormActivity extends AppCompatActivity {
 
 
     void setClickListeners() {
-        TextView phoneNumber1 = findViewById(R.id.phoneNumber1);
-        TextView phoneNumber2 = findViewById(R.id.phoneNumber2);
-        TextView emailAddress = findViewById(R.id.emailText);
-        phoneNumber1.setText(Html.fromHtml(phoneNo1));
-        phoneNumber2.setText(Html.fromHtml(phoneNo2));
-        emailAddress.setText(Html.fromHtml(email));
+        TextView emailText= findViewById(R.id.emailText);
+        TextView emailHead = findViewById(R.id.textView12);
+        TextView phoneNo2 = findViewById(R.id.phoneNumber2);
+        TextView phoneNo1 = findViewById(R.id.phoneNumber1);
+        TextView phoneHead = findViewById(R.id.textView9);
 
-        phoneNumber1.setOnClickListener(new View.OnClickListener() {
+        emailHead.setVisibility(View.VISIBLE);
+        emailText.setVisibility(View.VISIBLE);
+        phoneNo1.setVisibility(View.VISIBLE);
+        phoneNo2.setVisibility(View.VISIBLE);
+        phoneHead.setVisibility(View.VISIBLE);
+
+        phoneNo1.setText(Html.fromHtml("<u>"+contact.getPhoneNo1()+"</u>"));
+        phoneNo2.setText(Html.fromHtml("<u>"+contact.getPhoneNo2()+"</u>"));
+        emailText.setText(Html.fromHtml("<u>"+contact.getEmail()+"</u>"));
+
+        phoneNo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + phoneNumber1.getText().toString()));
+                i.setData(Uri.parse("tel:" + phoneNo1.getText().toString()));
                 if (i.resolveActivity(getPackageManager()) != null) {
                     startActivity(i);
                 }
             }
         });
 
-        phoneNumber2.setOnClickListener(new View.OnClickListener() {
+        phoneNo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:" + phoneNumber2.getText().toString()));
+                i.setData(Uri.parse("tel:" + phoneNo2.getText().toString()));
                 if (i.resolveActivity(getPackageManager()) != null) {
                     startActivity(i);
                 }
             }
         });
 
-        emailAddress.setOnClickListener(new View.OnClickListener() {
+        emailText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_SENDTO);
-                i.setData(Uri.parse("mailto:" + emailAddress.getText().toString()));
+                i.setData(Uri.parse("mailto:" + emailText.getText().toString()));
                 if (i.resolveActivity(getPackageManager()) != null) {
                     startActivity(i);
                 }

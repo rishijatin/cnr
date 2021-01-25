@@ -69,26 +69,26 @@
         <TextView
             android:id="@+id/qualificationEntry"
             android:layout_width="wrap_content"
-            android:textSize="20sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            tools:text="MBBS,MD"
-            app:layout_constraintBottom_toBottomOf="@+id/qualificationText"
-            app:layout_constraintStart_toEndOf="@+id/qualificationText"
-            app:layout_constraintTop_toTopOf="@+id/qualificationText" />
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/qualificationText"
+            tools:text="MBBS,MD" />
 
         <TextView
             android:id="@+id/experienceText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:visibility="invisible"
             android:layout_marginTop="8dp"
-            android:textSize="20sp"
+            android:text="Experience:"
             android:textColor="@color/black"
-            android:text="Experience(years):"
+            android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/qualificationText" />
+            app:layout_constraintTop_toBottomOf="@+id/qualificationEntry" />
 
         <TextView
             android:id="@+id/experienceEntry"
@@ -120,10 +120,12 @@
             android:visibility="invisible"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Send mail for apointment"
+            android:text="Send mail for appointment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/doctorDescription" />
+
+
 
         <ProgressBar
             android:id="@+id/progressBar"

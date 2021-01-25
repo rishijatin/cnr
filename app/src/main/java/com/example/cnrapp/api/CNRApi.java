@@ -1,6 +1,7 @@
 package com.example.cnrapp.api;
 
 import com.example.cnrapp.models.Category;
+import com.example.cnrapp.models.ContactInfo;
 import com.example.cnrapp.models.DoctorDetail;
 import com.example.cnrapp.models.DoctorList;
 import com.example.cnrapp.models.PersonModel;
@@ -50,6 +51,9 @@ public interface CNRApi {
 
     @GET("about/{id}/")
     Call<PersonModel> getPerson(@Path("id") int id);
+
+    @GET("contact/")
+    Call<ContactInfo> getContact();
 
 
 }
