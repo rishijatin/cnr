@@ -9,14 +9,16 @@ public class eCommerceItem {
     private String photoURL;
     @SerializedName("name")
     private String heading;
-    private int price;
+    private String price;
 
-    public eCommerceItem(int id,String photoURL, String heading,int price) {
+    public eCommerceItem(int id, String photoURL, String heading, String price) {
         this.id = id;
         this.photoURL = photoURL;
         this.heading = heading;
         this.price = price;
     }
+
+
 
     public int getId() {
         return id;
@@ -30,7 +32,7 @@ public class eCommerceItem {
         return heading;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 }

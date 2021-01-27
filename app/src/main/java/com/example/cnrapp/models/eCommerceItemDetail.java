@@ -8,13 +8,13 @@ public class eCommerceItemDetail {
     String name;
     @SerializedName("large_image_url")
     String imageUrl;
-    int price;
+    String price;
     String description;
     @SerializedName("website_url")
     String webURL;
     int category;
 
-    public eCommerceItemDetail(int id, String name, String imageUrl, int price, String description, String webURL, int category) {
+    public eCommerceItemDetail(int id, String name, String imageUrl, String price, String description, String webURL, int category) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
@@ -37,7 +37,7 @@ public class eCommerceItemDetail {
         return imageUrl;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 

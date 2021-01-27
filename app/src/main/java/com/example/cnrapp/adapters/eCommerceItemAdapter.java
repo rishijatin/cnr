@@ -48,7 +48,7 @@ public class eCommerceItemAdapter extends RecyclerView.Adapter<eCommerceItemAdap
         eCommerceItem post = item.get(position);
 
         holder.getHeadingText().setText(post.getHeading());
-        holder.getPriceText().setText("Rs. "+post.getPrice());
+        holder.getPriceText().setText(post.getPrice());
         RequestOptions options = new RequestOptions().centerCrop()
                 .placeholder(R.drawable.ic_baseline_error_outline_24)
                 .error(R.drawable.ic_baseline_error_outline_24);

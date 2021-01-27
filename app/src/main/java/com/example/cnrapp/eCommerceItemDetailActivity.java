@@ -91,14 +91,14 @@ public class eCommerceItemDetailActivity extends AppCompatActivity {
                 .error(R.drawable.ic_baseline_error_outline_24);
 
         heading.setText(item.getName());
-        price.setText("Rs. "+item.getPrice());
+        price.setText(item.getPrice());
         description.setText(item.getDescription());
         knowMore.setText("Have a question?");
 
         contactUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO Make Transition
+                startActivity(new Intent(eCommerceItemDetailActivity.this,EnquiryFormActivity.class));
             }
         });
 
