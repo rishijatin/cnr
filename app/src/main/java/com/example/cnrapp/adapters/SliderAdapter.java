@@ -2,6 +2,7 @@ package com.example.cnrapp.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -53,6 +54,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.MySliderHolde
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             this.itemView = itemView;
+
 
         }
     }
