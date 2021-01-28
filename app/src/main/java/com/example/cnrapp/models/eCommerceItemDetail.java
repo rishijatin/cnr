@@ -2,22 +2,24 @@ package com.example.cnrapp.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class eCommerceItemDetail {
 
     int id;
     String name;
-    @SerializedName("large_image_url")
-    String imageUrl;
+    @SerializedName("photos")
+    List<PersonPics> photos;
     String price;
     String description;
     @SerializedName("website_url")
     String webURL;
     int category;
 
-    public eCommerceItemDetail(int id, String name, String imageUrl, String price, String description, String webURL, int category) {
+    public eCommerceItemDetail(int id, String name, List<PersonPics> imageUrl, String price, String description, String webURL, int category) {
         this.id = id;
         this.name = name;
-        this.imageUrl = imageUrl;
+        this.photos = imageUrl;
         this.price = price;
         this.description = description;
         this.webURL = webURL;
@@ -33,8 +35,8 @@ public class eCommerceItemDetail {
         return name;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public List<PersonPics> getPhotos() {
+        return photos;
     }
 
     public String getPrice() {

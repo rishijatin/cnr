@@ -14,9 +14,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.cnrapp.adapters.SliderAdapter;
 import com.example.cnrapp.api.RetrofitBuilder;
 import com.example.cnrapp.callbacks.RetrofitCallBack;
 import com.example.cnrapp.models.eCommerceItemDetail;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.List;
 
@@ -78,7 +82,7 @@ public class eCommerceItemDetailActivity extends AppCompatActivity {
     private void loadItem()
     {
         TextView heading = findViewById(R.id.heading);
-        ImageView image = findViewById(R.id.image);
+        SliderView image = findViewById(R.id.image);
         TextView price = findViewById(R.id.PriceText);
         TextView description= findViewById(R.id.description);
         TextView knowMore = findViewById(R.id.knowMore);
@@ -114,7 +118,10 @@ public class eCommerceItemDetailActivity extends AppCompatActivity {
             }
         });
 
-        Glide.with(this).load(item.getImageUrl()).apply(options).into(image);
+        image.setSliderAdapter(new SliderAdapter(this,item.getPhotos()));
+        image.setIndicatorAnimation(IndicatorAnimationType.DROP);
+        image.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        //Glide.with(this).load(item.getImageUrl()).apply(options).into(image);
 
 
 
