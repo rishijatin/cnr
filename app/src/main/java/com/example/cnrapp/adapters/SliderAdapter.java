@@ -1,6 +1,8 @@
 package com.example.cnrapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -36,6 +38,17 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.MySliderHolde
         Glide.with(viewHolder.itemView).load(photos.get(position).getUrl()).fitCenter().
                 into(viewHolder.imageView);
 
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(photos.get(position).getUrl());
+                Intent i= new Intent(Intent.ACTION_VIEW,uri);
+                if(i.resolveActivity(context.getPackageManager())!=null)
+                {
+                    context.startActivity(i);
+                }
+            }
+        });
 
     }
 
@@ -49,13 +62,14 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.MySliderHolde
         ImageView imageView;
         View itemView;
 
-
         public MySliderHolder(View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             this.itemView = itemView;
 
-
         }
+
+
+
     }
 }

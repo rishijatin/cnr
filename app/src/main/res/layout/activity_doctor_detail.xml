@@ -13,8 +13,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="16dp"
         android:background="@color/background_color"
+        android:paddingBottom="16dp"
         tools:context=".DoctorDetailActivity">
 
         <androidx.constraintlayout.widget.Guideline
@@ -46,9 +46,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            tools:layout_height="50dp"
+            tools:layout_width="100dp"
             android:textSize="20dp"
             android:textStyle="bold"
-            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/doctorImage" />
@@ -58,13 +60,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:visibility="invisible"
-            android:text="Qualification: "
-            android:textSize="20sp"
-            android:textColor="@color/black"
             android:layout_marginTop="8dp"
+            android:text="Qualification: "
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doctorName" />
+            app:layout_constraintTop_toBottomOf="@+id/youtubeLink" />
 
         <TextView
             android:id="@+id/qualificationEntry"
@@ -95,11 +97,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            tools:text="3 years"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/experienceText"
             app:layout_constraintStart_toEndOf="@+id/experienceText"
-            app:layout_constraintTop_toTopOf="@+id/experienceText" />
+            app:layout_constraintTop_toTopOf="@+id/experienceText"
+            tools:text="3 years" />
 
         <TextView
             android:id="@+id/doctorDescription"
@@ -108,24 +110,22 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            tools:text="TextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/experienceText" />
+            app:layout_constraintTop_toBottomOf="@+id/experienceText"
+            tools:text="TextView" />
+
 
         <Button
             android:id="@+id/mailButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="invisible"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:text="Send mail for appointment"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/doctorDescription" />
-
-
+            app:layout_constraintTop_toBottomOf="@+id/doctorImages" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -136,6 +136,47 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/youtubeLink"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline11"
+            app:layout_constraintStart_toStartOf="@+id/guideline3"
+            app:layout_constraintTop_toBottomOf="@+id/doctorName"
+            app:srcCompat="@drawable/ic_youtubelogo"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.4" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.6" />
+
+        <com.smarteist.autoimageslider.SliderView
+            android:id="@+id/doctorImages"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintDimensionRatio="1:1"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/doctorDescription"
+             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

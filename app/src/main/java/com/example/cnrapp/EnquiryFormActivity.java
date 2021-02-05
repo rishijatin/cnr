@@ -110,7 +110,7 @@ public class EnquiryFormActivity extends AppCompatActivity {
 
 
                     DatabaseReference newQuery = mDatabase.push();
-
+                    newQuery.child("Timestamp").setValue(System.currentTimeMillis());
                     newQuery.child("Name").setValue(nameEdit.getText().toString());
                     newQuery.child("Email").setValue(emailEdit.getText().toString());
                     newQuery.child("Phone Number").setValue(mobileEdit.getText().toString());

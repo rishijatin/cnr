@@ -82,6 +82,8 @@ public class eCommerceItemDetailActivity extends AppCompatActivity {
     private void loadItem()
     {
         TextView heading = findViewById(R.id.heading);
+        ImageView imageView = findViewById(R.id.youtubeLogo);
+        imageView.setVisibility(View.VISIBLE);
         SliderView image = findViewById(R.id.image);
         TextView price = findViewById(R.id.PriceText);
         TextView description= findViewById(R.id.description);
@@ -118,8 +120,21 @@ public class eCommerceItemDetailActivity extends AppCompatActivity {
             }
         });
 
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(item.getWebURL());
+                Intent i= new Intent(Intent.ACTION_VIEW,uri);
+                if(i.resolveActivity(getPackageManager())!=null)
+                {
+                    startActivity(i);
+                }
+            }
+        });
+
+
         image.setSliderAdapter(new SliderAdapter(this,item.getPhotos()));
-        image.setIndicatorAnimation(IndicatorAnimationType.DROP);
+        image.setIndicatorAnimation(IndicatorAnimationType.NONE);
         image.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
         //Glide.with(this).load(item.getImageUrl()).apply(options).into(image);
 

@@ -3,7 +3,9 @@ package com.example.cnrapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,9 +15,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.cnrapp.adapters.SliderAdapter;
 import com.example.cnrapp.api.RetrofitBuilder;
 import com.example.cnrapp.callbacks.RetrofitCallBack;
 import com.example.cnrapp.models.DoctorDetail;
+import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -83,12 +89,25 @@ public class DoctorDetailActivity extends AppCompatActivity {
         TextView experienceText = findViewById(R.id.experienceText);
         TextView qualificationText = findViewById(R.id.qualificationText);
         ProgressBar progressBar = findViewById(R.id.progressBar);
+        ImageView youtubeLogo = findViewById(R.id.youtubeLink);
+        youtubeLogo.setVisibility(View.VISIBLE);
         progressBar.setVisibility(View.GONE);
 
         experienceText.setVisibility(View.VISIBLE);
         qualificationText.setVisibility(View.VISIBLE);
 
-
+        youtubeLogo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i("Jatin","Happened");
+                Uri uri = Uri.parse(doctor.getVideoUrl());
+                Intent i= new Intent(Intent.ACTION_VIEW,uri);
+                if(i.resolveActivity(getPackageManager())!=null)
+                {
+                    startActivity(i);
+                }
+            }
+        });
         ImageView doctorImage = findViewById(R.id.doctorImage);
         Button sendMailButton = findViewById(R.id.mailButton);
         sendMailButton.setVisibility(View.VISIBLE);
@@ -103,6 +122,15 @@ public class DoctorDetailActivity extends AppCompatActivity {
                 error(R.drawable.ic_baseline_error_outline_24);
 
         Glide.with(DoctorDetailActivity.this).load(doctor.getUrl()).apply(options).into(doctorImage);
+
+        SliderView images = findViewById(R.id.doctorImages);
+        if(doctor.getPhotos().size()>0) {
+            images.setVisibility(View.VISIBLE);
+        }
+        images.setSliderAdapter(new SliderAdapter(this,doctor.getPhotos()));
+        images.setIndicatorAnimation(IndicatorAnimationType.DROP);
+        images.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+
 
         sendMailButton.setOnClickListener(new View.OnClickListener() {
             @Override

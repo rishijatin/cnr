@@ -61,6 +61,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         TextView description = findViewById(R.id.description);
         TextView knowMore = findViewById(R.id.knowMore);
         ImageView imageView = findViewById(R.id.image);
+        ImageView youtubeImage = findViewById(R.id.youtubeLogo);
 
         heading.setText(post.getHeading());
         description.setText(post.getDescription());
@@ -76,6 +77,19 @@ public class BlogDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Uri uri = Uri.parse(post.getWebPageUrl());
+                Intent i= new Intent(Intent.ACTION_VIEW,uri);
+                if(i.resolveActivity(getPackageManager())!=null)
+                {
+                    startActivity(i);
+                }
+            }
+        });
+
+        youtubeImage.setVisibility(View.VISIBLE);
+        youtubeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri uri = Uri.parse(post.getUrl());
                 Intent i= new Intent(Intent.ACTION_VIEW,uri);
                 if(i.resolveActivity(getPackageManager())!=null)
                 {
