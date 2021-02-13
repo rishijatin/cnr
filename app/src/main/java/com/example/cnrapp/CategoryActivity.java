@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.cnrapp.adapters.CategoryAdapter;
 import com.example.cnrapp.api.RetrofitBuilder;
 import com.example.cnrapp.callbacks.RetrofitCallBack;
+import com.example.cnrapp.events.eventCategoryActivity;
 import com.example.cnrapp.models.Category;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -155,6 +156,10 @@ public class CategoryActivity extends AppCompatActivity {
                 else if(categories.get(position).getName().equals("e-Health"))
                 {
                     i = new Intent(CategoryActivity.this,eHealthCategoryActivity.class);
+                }
+                else if(categories.get(position).getName().equals("Events"))
+                {
+                    i = new Intent(CategoryActivity.this, eventCategoryActivity.class);
                 }
                 else {
                      i = new Intent(CategoryActivity.this, BlogItemActivity.class);

@@ -4,6 +4,9 @@ import com.example.cnrapp.models.Category;
 import com.example.cnrapp.models.ContactInfo;
 import com.example.cnrapp.models.DoctorDetail;
 import com.example.cnrapp.models.DoctorList;
+import com.example.cnrapp.models.EventCategory;
+import com.example.cnrapp.models.EventDetail;
+import com.example.cnrapp.models.FunctionList;
 import com.example.cnrapp.models.PersonModel;
 import com.example.cnrapp.models.PostList;
 import com.example.cnrapp.models.PostListDetail;
@@ -54,6 +57,15 @@ public interface CNRApi {
 
     @GET("contact/")
     Call<ContactInfo> getContact();
+
+    @GET("events/")
+    Call<List<EventCategory>> getEvents();
+
+    @GET("events/category={id}/")
+    Call<List<FunctionList>> getFunctions(@Path("id") int id);
+
+    @GET("events/{id}/")
+    Call<EventDetail> getEvent(@Path("id") int id);
 
 
 }

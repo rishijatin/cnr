@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_foreground"
         android:supportsRtl="true"
         android:theme="@style/Theme.CNRApp">
-        <activity android:name=".DoctorDetailActivity"></activity>
+        <activity android:name=".events.eventDetailActivity"></activity>
+        <activity android:name=".events.eventListActivity" />
+        <activity android:name=".events.eventCategoryActivity" />
+        <activity android:name=".DoctorDetailActivity" />
         <activity android:name=".DoctorListActivity" />
         <activity android:name=".eHealthCategoryActivity" />
         <activity android:name=".AboutPersonActivity" />
