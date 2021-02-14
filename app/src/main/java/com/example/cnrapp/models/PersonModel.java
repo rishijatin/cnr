@@ -14,14 +14,17 @@ public class PersonModel {
     @SerializedName("family_members")
     private String familyMembers;
     List<PersonPics> photos;
+    @SerializedName("video_url")
+    private String videoUrl;
 
-    public PersonModel(int id, String name, String aboutPerson, String socialWork, String familyMembers, List<PersonPics> photos) {
+    public PersonModel(int id, String name, String aboutPerson, String socialWork, String familyMembers, List<PersonPics> photos,String videoUrl) {
         this.id = id;
         this.name = name;
         this.aboutPerson = aboutPerson;
         this.socialWork = socialWork;
         this.familyMembers = familyMembers;
         this.photos = photos;
+        this.videoUrl=videoUrl;
     }
 
     public int getId() {
@@ -47,4 +50,6 @@ public class PersonModel {
     public List<PersonPics> getPhotos() {
         return photos;
     }
+
+    public String getVideoUrl(){return videoUrl;}
 }

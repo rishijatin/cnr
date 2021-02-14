@@ -2,6 +2,8 @@ package com.example.cnrapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -67,6 +69,28 @@ public class AboutPersonActivity extends AppCompatActivity {
         personFamilyText.setVisibility(View.VISIBLE);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.GONE);
+
+        ImageView youtubeLink = findViewById(R.id.youtubeLink);
+
+        if(person.getVideoUrl()!=null){
+            youtubeLink.setVisibility(View.VISIBLE);
+            youtubeLink.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Uri uri = Uri.parse(person.getVideoUrl());
+                    Intent i= new Intent(Intent.ACTION_VIEW,uri);
+                    if(i.resolveActivity(getPackageManager())!=null)
+                    {
+                        startActivity(i);
+                    }
+                }
+            });
+        }
+        else
+        {
+            youtubeLink.setVisibility(View.GONE);
+        }
+
 
         aboutHimHeading.setText("About "+person.getName());
         aboutHimText.setText(person.getAboutPerson());

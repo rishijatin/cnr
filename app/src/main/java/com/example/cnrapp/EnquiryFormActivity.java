@@ -165,16 +165,22 @@ public class EnquiryFormActivity extends AppCompatActivity {
         TextView phoneNo2 = findViewById(R.id.phoneNumber2);
         TextView phoneNo1 = findViewById(R.id.phoneNumber1);
         TextView phoneHead = findViewById(R.id.textView9);
+        TextView addressHead = findViewById(R.id.addressHead);
+        TextView addressText = findViewById(R.id.addressText);
 
         emailHead.setVisibility(View.VISIBLE);
         emailText.setVisibility(View.VISIBLE);
         phoneNo1.setVisibility(View.VISIBLE);
         phoneNo2.setVisibility(View.VISIBLE);
         phoneHead.setVisibility(View.VISIBLE);
+        addressHead.setVisibility(View.VISIBLE);
+        addressText.setVisibility(View.VISIBLE);
+
 
         phoneNo1.setText(Html.fromHtml("<u>"+contact.getPhoneNo1()+"</u>"));
         phoneNo2.setText(Html.fromHtml("<u>"+contact.getPhoneNo2()+"</u>"));
         emailText.setText(Html.fromHtml("<u>"+contact.getEmail()+"</u>"));
+        addressText.setText(contact.getAddress());
 
         phoneNo1.setOnClickListener(new View.OnClickListener() {
             @Override
