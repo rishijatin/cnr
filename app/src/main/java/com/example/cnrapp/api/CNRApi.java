@@ -4,6 +4,9 @@ import com.example.cnrapp.models.Category;
 import com.example.cnrapp.models.ContactInfo;
 import com.example.cnrapp.models.DoctorDetail;
 import com.example.cnrapp.models.DoctorList;
+import com.example.cnrapp.models.EmploymentCategory;
+import com.example.cnrapp.models.EmploymentDetails;
+import com.example.cnrapp.models.EmploymentList;
 import com.example.cnrapp.models.EventCategory;
 import com.example.cnrapp.models.EventDetail;
 import com.example.cnrapp.models.FunctionList;
@@ -15,6 +18,8 @@ import com.example.cnrapp.models.eCommerceCategory;
 import com.example.cnrapp.models.eCommerceItem;
 import com.example.cnrapp.models.eCommerceItemDetail;
 import com.example.cnrapp.models.eHealthCategory;
+import com.example.cnrapp.models.eVehicleCategory;
+import com.example.cnrapp.models.eVehicleDetail;
 
 import java.util.List;
 
@@ -66,6 +71,21 @@ public interface CNRApi {
 
     @GET("events/{id}/")
     Call<EventDetail> getEvent(@Path("id") int id);
+
+    @GET("eVehicle/")
+    Call<List<eVehicleCategory>> getVehicleCategories();
+
+    @GET("eVehicle/category={id}/")
+    Call<eVehicleDetail> getVehicleDetail(@Path("id") int id);
+
+    @GET("employment/")
+    Call<List<EmploymentCategory>> getEmploymentCategories();
+
+    @GET("employment/category={id}/")
+    Call<List<EmploymentList>> getEmploymentList(@Path("id") int id);
+
+    @GET("employment/{id}/")
+    Call<EmploymentDetails> getEmploymentDetails(@Path("id") int id);
 
 
 }

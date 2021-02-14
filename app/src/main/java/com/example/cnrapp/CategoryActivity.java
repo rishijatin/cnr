@@ -20,6 +20,8 @@ import android.widget.Toast;
 import com.example.cnrapp.adapters.CategoryAdapter;
 import com.example.cnrapp.api.RetrofitBuilder;
 import com.example.cnrapp.callbacks.RetrofitCallBack;
+import com.example.cnrapp.eVehicle.eVehicleCategoryActivity;
+import com.example.cnrapp.employmentNews.EmploymentCategoryActivity;
 import com.example.cnrapp.events.eventCategoryActivity;
 import com.example.cnrapp.models.Category;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -41,21 +43,21 @@ public class CategoryActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.main_menu,menu);
+        menuInflater.inflate(R.menu.main_menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId())
-        {
-            case R.id.person :
+        switch (item.getItemId()) {
+            case R.id.person:
 
-                Intent i = new Intent(CategoryActivity.this,AboutPersonActivity.class);
+                Intent i = new Intent(CategoryActivity.this, AboutPersonActivity.class);
                 startActivity(i);
                 return true;
-            default:return super.onOptionsItemSelected(item);
+            default:
+                return super.onOptionsItemSelected(item);
         }
 
 
@@ -129,8 +131,7 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
 
-    private void loadGrid()
-    {
+    private void loadGrid() {
         progressBar.setVisibility(View.GONE);
         GridView gridView = findViewById(R.id.GridView);
         CategoryAdapter categoryAdapter = new CategoryAdapter(CategoryActivity.this, categories);
@@ -141,7 +142,7 @@ public class CategoryActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(CategoryActivity.this,EnquiryFormActivity.class));
+                startActivity(new Intent(CategoryActivity.this, EnquiryFormActivity.class));
             }
         });
 
@@ -149,20 +150,18 @@ public class CategoryActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i;
-                if(categories.get(position).getName().equals("e-Commerce"))
-                {
-                     i = new Intent(CategoryActivity.this,eCommerceActivity.class);
-                }
-                else if(categories.get(position).getName().equals("e-Health"))
-                {
-                    i = new Intent(CategoryActivity.this,eHealthCategoryActivity.class);
-                }
-                else if(categories.get(position).getName().equals("Events"))
-                {
+                if (categories.get(position).getId() == 5) {
+                    i = new Intent(CategoryActivity.this, eCommerceActivity.class);
+                } else if (categories.get(position).getId() == 3) {
+                    i = new Intent(CategoryActivity.this, eHealthCategoryActivity.class);
+                } else if (categories.get(position).getId() == 6) {
                     i = new Intent(CategoryActivity.this, eventCategoryActivity.class);
-                }
-                else {
-                     i = new Intent(CategoryActivity.this, BlogItemActivity.class);
+                } else if (categories.get(position).getId() == 4) {
+                    i = new Intent(CategoryActivity.this, eVehicleCategoryActivity.class);
+                } else if (categories.get(position).getId() == 2) {
+                    i = new Intent(CategoryActivity.this, EmploymentCategoryActivity.class);
+                } else {
+                    i = new Intent(CategoryActivity.this, BlogItemActivity.class);
                 }
 
                 i.putExtra("CategoryName", categories.get(position).getName());
@@ -171,9 +170,6 @@ public class CategoryActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
 
 }

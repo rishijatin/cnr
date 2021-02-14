@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -75,6 +76,8 @@ public class eventDetailActivity extends AppCompatActivity {
         TextView heading = findViewById(R.id.heading);
         heading.setVisibility(View.VISIBLE);
         heading.setText(event.getName());
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+        progressBar.setVisibility(View.INVISIBLE);
 
         ConstraintLayout layout = findViewById(R.id.invitationCard);
         if (event.getInvitationCard() != null) {
@@ -92,6 +95,13 @@ public class eventDetailActivity extends AppCompatActivity {
                 }
             });
             Glide.with(getApplicationContext()).load(event.getInvitationCard()).into(cardImage);
+
+        }
+        else
+        {
+            layout.setVisibility(View.GONE);
+            ImageView cardImage = findViewById(R.id.cardImage);
+            cardImage.setVisibility(View.GONE);
 
         }
 
@@ -112,6 +122,10 @@ public class eventDetailActivity extends AppCompatActivity {
 
             });
         }
+        else
+        {
+            youTubeLink.setVisibility(View.GONE);
+        }
 
         SliderView sliderView = findViewById(R.id.sliderView);
         if(event.getPhotos().size()>0)
@@ -120,6 +134,10 @@ public class eventDetailActivity extends AppCompatActivity {
             sliderView.setSliderAdapter(new SliderAdapter(this,event.getPhotos()));
             sliderView.setIndicatorAnimation(IndicatorAnimationType.DROP);
             sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        }
+        else
+        {
+            sliderView.setVisibility(View.GONE);
         }
 
 
